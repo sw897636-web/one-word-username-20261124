@@ -12,13 +12,13 @@
 // explicit that entry.txt carries no trailing newline, so the gate sees
 // exactly the 12 characters of the handle and nothing else.
 
-import { writeFileSync } from "node:fs";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { mkdirSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
 
 const USERNAME = "sw897636-web";
 
-const outDir = dirname(fileURLToPath(import.meta.url));
+const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? "/output";
+mkdirSync(outDir, { recursive: true });
 const outPath = join(outDir, "entry.txt");
 
 writeFileSync(outPath, USERNAME, "utf8");
